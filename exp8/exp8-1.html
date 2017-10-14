@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>条纹表格</title>
+		<style type="text/css">
+			th {
+				width: 100px;
+				text-align: center;
+			}
+			td {
+				text-align: left;
+				padding-left: 20px;
+			}
+			.titleStyle {
+				background-color: goldenrod;
+			}
+			.evenStyle {
+				background-color: peachpuff;
+			}
+		</style>
+	</head>
+	<body>
+		<table border="1">
+			<caption>汽车销售</caption>
+			<tr>
+				<th>商品名称</th>
+				<th>单位</th>
+				<th>零售价格</th>
+			</tr>
+			<tr>
+				<td>奥迪A6</td>
+				<td>万元/辆</td>
+				<td>30.8</td>
+			</tr>
+			<tr>
+				<td>别克君威</td>
+				<td>万元/辆</td>
+				<td>17.8</td>
+			</tr>
+			<tr>
+				<td>尼桑天籁</td>
+				<td>万元/辆</td>
+				<td>18.8</td>
+			</tr>
+			<tr>
+				<td>马自达6</td>
+				<td>万元/辆</td>
+				<td>16.8</td>
+			</tr>
+			<tr>
+				<td>马自达3</td>
+				<td>万元/辆</td>
+				<td>14.8</td>
+			</tr>
+		</table>
+		<button id="attribute">使用CSS属性设置</button>
+		<button id="cssstyle">使用CSS样式设置</button>
+	</body>
+</html>
+<script>
+	window.onload = function(){
+		var attribute = document.getElementById("attribute");
+		var csstyle = document.getElementById("cssstyle");
+		var objss = document.getElementsByTagName("tr");
+		//css属性设置
+		attribute.onclick = function(){		
+			for(var i=0;i<objss.length;i++){
+				objss[i].className = "";
+			}
+			objss[0].style.backgroundColor = "gray";
+			for(var i=1;i<objss.length;i++){
+				if(i%2==0){
+					objss[i].style.backgroundColor = "yellowgreen";
+				}
+			}
+		}
+		//css样式设置
+		csstyle.onclick = function(){
+			for(var i=0;i<objss.length;i++){
+				objss[i].style.backgroundColor = "";
+			}
+			objss[0].className = "titleStyle";
+			for(var i=1;i<objss.length;i++){
+				if(i%2==0){
+					objss[i].className = "evenStyle";
+				}
+			}
+		}
+	}
+</script>

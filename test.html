@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>test</title>
+		<style type="text/css">
+			* {
+				font-size: 20px;
+				margin-bottom: 10px;;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<a href="" id="btn" onclick="javascript:return del();">弹出对话框计算</a><br/>
+		<span>结果是：</span>
+	</body>
+</html>
+<script type="text/javascript">
+			// window.onload = function(){
+				function del() {
+					var msg = "您真的确定要删除吗？\n\n请确认！";
+					if (confirm(msg)==true){
+						return true;
+					}else{
+						return false;
+					}
+				}
+
+			// }
+		</script>

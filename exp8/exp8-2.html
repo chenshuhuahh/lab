@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>元素移动</title>
+		<style type="text/css">
+			#main {
+				width: 525px;
+				height: 300px;
+				color: blue;
+				font-size: 30px;
+				border: 1px double #ccc;
+			}
+			#mytext {
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<span id="mytext">移动文字</span>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var main = document.getElementById("main");
+	var mytext = document.getElementById("mytext");
+	main.onclick = function(event){
+		var event = event || window.event;
+		var finalX = main.offsetWidth-mytext.offsetWidth;
+		var finalY = main.offsetHeight-mytext.offsetHeight;
+		mytext.style.left = event.clientX + "px";
+		mytext.style.top = event.clientY + "px";
+		if(event.clientX>finalX){//阻止越界
+			mytext.style.left = finalX + "px";
+		}
+		if(event.clientY>finalY){
+			mytext.style.top = finalY + "px";
+		}
+		//开启定时器
+		var timer  = setInterval(function(){
+			var x = mytext.offsetLeft;
+		   	var y = mytext.offsetTop;  
+		   	if (x < finalX)    x++;            
+		   	if (y < finalY)    y++;            
+		   	if ((x != finalX) || (y != finalY))  {
+		   	   mytext.style.left = x + "px";  
+		   	   mytext.style.top = y + "px";      
+		   	} else
+		      	clearInterval(timer); //要记得停止定时器
+		},10);
+	}
+</script>

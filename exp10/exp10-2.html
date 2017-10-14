@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>城市联动</title>
+	<style type="text/css">
+		.main {
+			width: 320px;
+			height: 130px;
+			margin: 50px auto;
+			border: 1px solid #ccc;
+			padding: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<p>请选择省份
+			<select id="province" name="province" onchange="change(this.selectedOptions);" >
+				<option value="">请选择省份</option>
+				<option value="广东">广东</option>
+				<option value="广西">广西</option>
+				<option value="湖南">湖南</option>
+				<option value="河北">河北</option>
+			</select>
+			城市
+			<select id="city" name="city">
+				<option>请选择城市</option>
+			</select>
+		</p>
+		<p>总面积：<span id="area"></span></p>
+		<p>总人口：<span id="people"></span></p>
+	</div>
+	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+	function change(province){
+			var val = province[0].value;
+			if (val != "") {
+				sendmessage(val);
+			}
+			else {
+				$("#city").empty();
+				$("#city").append("<option>请选择城市</option>");
+			}
+		}
+
+		function sendmessage(id){
+			$.ajax ({
+				type: "POST",
+				url: "exp10-2.php",
+				data: {province:id,},
+				dataType: "json",
+				success: show,
+			});
+		}
+
+		function show(result){
+			$("#area").text(result.area + "平方公里");
+			$("#people").text(result.people+"万人");
+			var cities = result.cities;
+			var city = $("#city");
+			city.empty();
+			city.append("<option>请选择城市</option>");
+			cities.forEach(function(val,index){
+				city.append("<option>"+val+"</option>");
+			});
+		}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lab3-2</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.main {
+			width: 600px;
+			margin: 100px auto;
+			font: 14px/14px "Arial" "Microsoft Yahei";
+		}
+		a {
+			color:#333;
+			text-decoration: none;
+		}
+		a:hover {
+			color:#C81623;
+		}
+		.message {
+			cursor: pointer;
+			text-align: center;
+			padding: 5px 0;
+			border: 1px solid #ccc;
+			font-size: 13px;
+		}
+		.message:hover {
+			background-color: #eee;
+		}
+		.news {
+			padding: 18px 0 20px 0;	
+			border-bottom: 1px solid #ccc;
+			overflow: hidden;	
+			position: relative;
+		}
+		.image {
+			width: 213px;
+			height: 142px;
+			float: left;
+			overflow: hidden;
+			margin-right: 17px;
+			position: relative;
+		}
+		.image:after {
+			content: attr(data-brief);
+			display: block;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			line-height: 142px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			color: #FFF;
+			font-family: '微软雅黑';
+			font-size: 18px;
+			background-color: rgba(170, 170, 170, 0);
+			z-index: -1;
+			transition: all 0.3s ease-in;
+		}
+		.image:hover:after {
+			background-color: rgba(170, 170, 170, 0.6);
+			z-index: 100;
+		}
+		h2 {	
+			overflow: hidden;
+			word-wrap: break-word;
+			font-size:17px;
+			font-weight: bold;
+		}
+		h2 a{
+			color: black;
+		}
+		.tag {
+			font-size: 14px;
+			color: #333;
+			margin-top: 18px;
+		}
+		.bottom {
+			font-size: 13px;
+			position: absolute;
+			bottom: 17px;
+			left: 230px;
+			right: 0;
+		}
+		.time {
+			color: #555;
+			display: inline;
+			float: left;
+		}	
+		.remark {
+			color: #333;
+			display: inline;
+			float: right;
+		}
+		.share {
+			margin-left: 8px;
+		}
+		.share:hover {
+			color: #67c;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="message">有11条消息，请点击查看</div>
+		<div class="news">
+			<div class="image" data-brief="点击我">
+				<a href="#"><img src="b0.jpg" alt=""> </a>
+			</div>
+			<div class="word">
+				<h2><a href="http://www.zhku.edu.cn/" target="_blank">共享单车的大迁徙：资本、梦想和不知疲倦的人</a></h2>
+				<div class="tag"><span>互联网</span></div>
+				<div class="bottom">
+					<div class="time">16分钟前</div>
+					<div class="remark">
+						<a href="#">评论</a>
+						<span  class="share">分享</span>
+					</div>
+				</div>
+			</div>
+				
+
+		</div>
+		<div class="news">
+			<div class="image" data-brief="点击我">
+				<a href="#"><img src="b1.jpg" alt=""> </a>
+			</div>
+			<div class="word">
+				<h2><a href="http://www.zhku.edu.cn/" target="_blank">共享单车火了而共享汽车却被吐槽 背后逻辑发人深思</a></h2>
+				<div class="tag"><span>互联网</span></div>
+				<div class="bottom">
+					<div class="time">23分钟前</div>
+					<div class="remark">
+						<a href="#">评论</a>
+						<span  class="share">分享</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="news">
+			<div class="image" data-brief="点击我">
+				<a href="#"><img src="b2.jpg" alt=""> </a>
+			</div>
+			<div class="word">
+				<h2><a href="http://www.zhku.edu.cn/" target="_blank">iPhone 7频丢数据 苹果店员称每天好几例</a></h2>
+				<div class="tag"><span>电信</span></div>
+				<div class="bottom">
+					<div class="time">25分钟前</div>
+					<div class="remark">
+						<a href="#">评论(2)</a>
+						<span class="share">分享</span>
+					</div>
+				</div>
+			</div>					
+
+		</div>
+	</div>
+</body>
+</html>

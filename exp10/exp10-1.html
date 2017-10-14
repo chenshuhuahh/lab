@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>投票</title>
+	<style type="text/css">
+		* {margin: 0;padding: 0;}
+		.main {
+			width: 540px;
+			height: 200px;
+			margin: 50px auto;
+			border: 1px solid #ccc;
+			text-align: center;
+			padding: 10px 20px;
+		}
+		.flower {
+			margin: 20px 10px;
+			float: left;
+		}
+		img {
+			width: 160px;
+			height: 110px;
+		}
+	</style>
+</head>
+<body>
+	<form class="main" method="get">
+		<h3>我最喜欢的花卉评比</h3>
+		<div>
+			<div class="flower">
+				<img src="flower01.jpg" alt=""><br>
+				<p><span id="flower0">0</span>票</p>
+				<input type="button" id="one" name="one" value="投票" onclick="getmessage(0);">
+			</div>
+			<div class="flower">
+				<img src="flower02.jpg" alt=""><br>
+				<p><span id="flower1">0</span>票</p>
+				<input type="button" id="two" name="two" value="投票" onclick="getmessage(1);">
+			</div>
+			<div class="flower">
+				<img src="flower03.jpg" alt=""><br>
+				<p><span id="flower2">0</span>票</p>
+				<input type="button" id="three" name="three" value="投票" onclick="getmessage(2);">
+			</div>
+		</div>
+	</form> 
+	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			getmessage(-1);
+		});
+		function getmessage(flower){
+			$.ajax({
+				type:"get",
+				url:"exp10-1.php",
+				async:true,
+				data:{'flower':flower,},
+				success:function(result){
+					var votes = result.split(",");
+					votes.forEach(function(val,index){
+						$("#flower"+index).text(val);
+					});
+				}
+			});
+		}
+	</script>
+</body>
+</html>

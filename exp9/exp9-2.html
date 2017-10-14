@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>弹出式菜单</title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}			
+			body {
+				background-image: url(flower.jpg);
+			}
+			.main {
+				width: 450px;
+				height: 600px;
+				border: 5px double black;
+				margin: 50px auto;
+				padding: 20px 40px;				
+			}
+			.main ul li {
+				list-style-position: inside;
+			}
+			.float {
+				position: absolute;
+				width: 100px;
+				border: 3px double #395;
+				font-size: 18px;
+				left: 0;
+				top: 0;
+				display: none;
+
+			}
+			.float ul li {
+				list-style: none;
+				height: 35px;
+				line-height: 35px;
+				background-color: #7ee;
+				padding-left: 10px;
+			}
+			.float ul li:nth-child(1), .float ul li:nth-child(2),.float ul li:nth-child(3){
+				border-bottom: 1px dashed #395;
+			}
+			.float ul li:hover {
+				background-color: #e77;
+				font-weight: bold;
+			}
+		</style>		
+	</head>
+	<body oncontextmenu="return false;">
+		<div class="main" id="main">
+			<ul>
+				城市列表：
+				<li>广州</li>
+				<li>深圳</li>
+				<li>珠海</li>
+			</ul>
+		</div>
+		<div class="float" id="float">
+			<ul>
+				<li onclick="addItem();">添加</li>
+				<li onclick="delItem();">删除</li>
+				<li onclick="updItem();">修改</li>
+				<li onclick="selItem();">查询</li>
+			</ul>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var main = document.getElementById("main");
+	var float = document.getElementById("float");
+	var mainul = main.children[0];//得到main中的ul		
+	var mainulList = mainul.children;//获取ul里的所有孩子li
+	main.onmousedown = function(event){
+		var event = event || window.event;
+		if(event.button==2){
+			float.style.left = event.clientX+"px";
+			float.style.top  = event.clientY+"px";
+			float.style.display = "block";
+		}		
+	}
+	float.onmouseover = function(){
+		float.style.display = "block";
+	}
+	//当离开菜单的时候菜单隐藏
+	float.onmouseout = function(){
+		float.style.display = "none";
+	}
+
+	//判断这个城市是否存在
+	function checkCity(str){
+		var flag = false;//标记是否存在这个城市		
+		for (var i = 0; i <mainulList.length; i++) {
+			//一定要加innerHTML才是获取li里面的值，否则是获得一个li标签
+			if(str==mainulList[i].innerHTML){//判断是否存在这个城市
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+
+	//添加城市的方法
+	function addItem(){
+		//弹出输入框
+		var str = prompt("请输入添加的城市：","东莞");	
+		if(str){//判断是否有输入内容。有的话才执行操作
+			var flag = checkCity(str);
+			if(!flag){//如果不存在
+				var newli = document.createElement("li");//创建一个新的li节点
+				newli.innerHTML = str;//为新的li节点赋值
+				mainul.appendChild(newli);//将新的li节点加入到ul列表中			
+			}else{
+				alert("已经存在"+str+"这个城市");
+			}
+			float.style.display = "none";
+		}
+	}
+
+	//删除城市的方法
+	function delItem(){
+		var str = prompt("请输入要删除的城市：","东莞");	
+		if(str){
+			var flag = false;//标记是否存在这个城市	
+			var delIndex = null;	
+			for (var i = 0; i <mainulList.length; i++) {
+				//一定要加innerHTML才是获取li里面的值，否则是获得一个li标签
+				if(str==mainulList[i].innerHTML){//判断是否存在这个城市
+					flag = true;
+					delIndex = i;
+					break;
+				}
+			}
+			if(!flag){//如果不存在
+				alert("不存在"+str+"这个城市");			
+			}else{
+				mainul.removeChild(mainulList[delIndex]);
+				alert("成功删除"+str+"这个城市");
+			}
+			float.style.display = "none";
+		}
+	}
+
+	//修改
+	function updItem(){
+		var str = prompt("请输入要修改的城市：","东莞");
+		if(str){	
+			var flag = false;//标记是否存在这个城市	
+			var delIndex = null;	
+			for (var i = 0; i <mainulList.length; i++) {
+				//一定要加innerHTML才是获取li里面的值，否则是获得一个li标签
+				if(str==mainulList[i].innerHTML){//判断是否存在这个城市
+					flag = true;
+					updIndex = i;
+					break;
+				}
+			}
+			if(!flag){//如果不存在
+				alert("不存在"+str+"这个城市，修改失败");			
+			}else{
+				var str_upd = prompt("存在"+str+"这个城市，请输入...修改后...的城市：","揭阳");
+				if(str_upd){
+					var flag_upd = checkCity(str_upd);
+					if(flag_upd){//如果存在
+						alert("已经存在"+str_upd+"这个城市，修改失败");			
+					}else{
+						mainulList[updIndex].innerHTML = str_upd;
+					}
+				}
+			}
+			float.style.display = "none";
+		}
+	}
+	//查询
+	function selItem(){
+		var str = prompt("请输入要查询的城市：","东莞");
+		if(str){	
+			var flag = checkCity(str);
+			if(flag){//如果存在
+				alert("存在"+str+"这个城市");			
+			}else{
+				alert("不存在"+str+"这个城市");
+			}
+			float.style.display = "none";
+		}
+	}
+
+</script>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery控件事件</title>
+		<style type="text/css">
+			.main {
+				width: 500px;
+				height: 200px;
+				margin: 100px auto;
+			}
+			input[type="text"] {
+				width: 150px;
+				height: 25px;
+				padding-left: 5px;
+			}
+			input {
+				margin-bottom: 10px;
+			}
+		</style>
+		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				//当第二个文本框获得焦点的时候文本会显示第一个文本框的内容
+				$("#two").focus(function(){
+					$("#two").val($("#one").val());
+				});
+				//当点击第二个文本框的时候文本会被选中
+				$("#two").click(function(){
+					$("#two").select();
+				});
+				$("#hide").click(function(){
+					if($("#hide").prop("checked")){
+						$("#three").hide();
+						$('.changethree').html("显示第三个文本框");
+					}
+					else{
+						$("#three").show();
+						$('.changethree').html("隐藏第三个文本框");
+					}
+				});
+				$("#tolong").click(function(){
+					if($("#tolong").prop("checked")){
+						$("#one").css("width","300px");
+						$('.changeone').html("变短第一个文本框");
+					}
+					else{
+						$("#one").css("width","150px");
+						$('.changeone').html("变长第一个文本框");
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="main">
+			<input type="text" value="1" id="one"/><br />
+			<input type="text" value="2" id="two"/><br />
+			<label><input type="checkbox" id="hide"/><span class="changethree">隐藏第三个文本框</span></label><br />
+			<label><input type="checkbox" id="tolong"/><span class="changeone">变长第一个文本框</span></label><br />
+			<input type="text" value="我是第三个文本框" id="three"/><br />
+		</div>
+	</body>
+</html>

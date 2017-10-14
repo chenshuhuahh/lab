@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lab2-2</title>
+	<style type="text/css">
+		.main {/*最外层的盒子*/
+			width: 500px;
+			margin: 0 auto;
+			font-size: 14px;
+			border: 1px solid;
+			padding: 20px 20px 10px 20px;
+		}
+		.free {/*按钮*/
+			margin-left: 10px;
+		}
+		.attention {
+			color: #ccc;
+		}
+		i {/*每一行前面*的样式*/
+			color: red;
+			padding-right: 4px;
+		}
+		.tip {/*密码输入提示*/
+			font-size: 10px;
+			display: inline-block;
+			width: 130px;
+			vertical-align: top;
+			border: 1px solid black;
+			padding: 0 3px;
+			background-color: #ffffcc;
+			margin-left: 10px;
+		}
+		.first {/*前面的文字*/
+			width: 150px;
+			display: inline-block;
+			text-align: right;
+		}		
+		input {
+			padding-left: 5px;
+			height: 25px;
+			font-size: 14px;
+		}
+		.row {/*每一行*/
+			padding-bottom: 10px;
+		}
+
+		.sex {/*设置radio和文字对齐*/
+			vertical-align:middle;
+			margin-top:-2px; 
+			margin-bottom:1px; 
+		}
+		select {/*下拉框*/
+			width: 80px;
+		}
+		.kuang {/*下拉框外面的框*/
+			display: inline-block;
+			border: 1px solid #ccc;
+			padding: 5px 8px;
+			margin-right: 15px;
+		}
+		.register {/*立即注册按钮*/
+			width: 150px;
+			height: 50px;
+			border-radius: 5px 5px 5px 5px;
+			background: url(new_btn.png) -411px 0 no-repeat;
+		}
+		.register:hover {
+			background: url(new_btn.png) -566px 0 no-repeat;
+			cursor: pointer;
+		}
+		.pink:hover {
+			background-color: #fcf;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<form action="" method="GET">
+			<div class="row">
+			<label for="phone"><span class="first"><i>*</i>我的手机号码：</span></label>
+			<input type="text" class="pink" id="phone" name="phone" placeholder="输入手机" required="required" pattern="^1[3-9]\d{9}">
+			<button class="free" name="freenum">免费获取验证码</button>
+			</div>
+			
+			<div class="row">
+			<span class="first"></span>
+			<span class="attention">完成注册后，手机号码为你的微博注册号</span>
+			</div>
+
+			<div class="row">
+			<label for="password"><span class="first"><i>*</i>创建密码：</span></label>
+			<input type="password" class="pink" id="password" name="mpassword">
+			<span class="tip">为了你的账户安全，请使用与其他网络不同的密码</span>
+			</div>
+			
+			<div class="row">
+			<label for="myname"><span class="first"><i>*</i>昵称：</span></label>
+			<input type="text" class="pink" id="myname" name="myname" placeholder="输入昵称" required="required">
+			</div>
+
+			<div class="row">
+				<span class="first"><i>*</i>性别：</span>	
+				<label><input type="radio" class="sex" name="sex" checked="checked">男</label>
+				<label><input type="radio" class="sex" name="sex">女</label>									
+			</div>
+
+			<div class="row">
+				<span class="first"><i>*</i>所在地：</span>
+				<span class="kuang">
+				<select name="shi">
+					<option value="shenzhen" selected="selected">深圳市</option>
+					<option value="guangzhou">广州市</option>
+					<option value="dongguan">上海市</option>
+					<option value="huizhou">北京市</option>
+				</select>
+				</span>
+				<span class="kuang">
+				<select name="qu">
+					<option value="haidian" selected="selected">海淀区</option>
+					<option value="dongcheng">东城区</option>
+					<option value="haizhu">海珠区</option>
+					<option value="yuexiu">越秀区</option>
+					<option value="huangpu">黄浦区</option>
+					<option value="futian">福田区</option>
+				</select>
+				</span>
+			</div>
+
+			<div class="row">
+			<label>
+				<span class="first"><i>*</i>手机验证码：</span>
+				<input type="text" class="pink" name="textnum" size="5">
+			</label>
+			</div>
+
+			<div class="row">
+			<span class="first"></span><button class="register"></button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

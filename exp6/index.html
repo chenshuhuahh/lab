@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>学生输入界面</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.main {
+				width: 600px;
+				border: 1px solid red;
+				margin: 50px auto;
+				text-align: center;
+			}
+			.row, h3, input{
+				margin: 15px 0;
+			}
+			input[type='text'],input[type='password'] {
+				width: 250px;
+				height: 20px;
+				padding: 5px;
+				font-size: 15px;
+			}
+			button,  .pr{
+				margin-right: 20px;
+			}
+			.first {
+				display: inline-block;
+				width: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<form action="index.php" method="post">
+				<h3>课程设计题目统计系统</h3>
+				<label class="row">学生学号：<input type="text" name="sno" placeholder="输入12位学号" required="required" pattern="\d{12}"></label><br>
+				<label class="row">学生姓名：<input type="text" name="name" placeholder="姓名" required="required"></label><br>
+				<label class="row">修改密码：<input type="password" name="psw" placeholder="首次输入作为后面修改的密码" required="required"></label><br>
+				<label class="row">你的题目：<input type="text" name="title" placeholder="按照课程设计题目要求" required="required"></label><br>
+				<label class="row">合作学生：<input type="text" name="partner" placeholder="姓名，没有就空，只负责不同方面"></label><br>
+				<p>
+					<span class="first"></span>
+				    <label class="pr"><input type="radio" name="action" value="add" checked="checked" />新增题目</label>
+				    <label class="pr"><input type="radio" name="action" value="modify"/>修改试题</label>
+				</p>
+				<p class="row">
+					<span class="first"></span>
+					<button type="submit">提交操作</button>
+					<a href="show_student.php">显示全部学生题目</a>
+				</p>
+			</form>
+			
+		</div>
+	</body>
+</html>

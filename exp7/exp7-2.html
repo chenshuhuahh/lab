@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lab7-2表单验证</title>
+	<style type="text/css">
+		.main {/*最外层的盒子*/
+			width: 650px;
+			margin: 0 auto;
+			font-size: 14px;
+			border: 1px solid;
+			padding: 20px 20px 10px 20px;
+		}
+		.free {/*按钮*/
+			margin-left: 10px;
+		}
+		.attention {
+			color: #ccc;
+		}
+		i {/*每一行前面*的样式*/
+			color: red;
+			padding-right: 4px;
+		}
+		.tip {/*密码输入提示*/
+			font-size: 10px;
+			display: inline-block;
+			width: 130px;
+			vertical-align: top;
+			border: 1px solid black;
+			padding: 0 3px;
+			background-color: #ffffcc;
+			margin-left: 10px;
+		}
+		.first {/*前面的文字*/
+			width: 150px;
+			display: inline-block;
+			text-align: right;
+		}		
+		input {
+			padding-left: 5px;
+			height: 25px;
+			font-size: 14px;
+		}
+		.row {/*每一行*/
+			padding-bottom: 10px;
+		}
+
+		.sex {/*设置radio和文字对齐*/
+			vertical-align:middle;
+			margin-top:-2px; 
+			margin-bottom:1px; 
+		}
+		select {/*下拉框*/
+			width: 80px;
+		}
+		.kuang {/*下拉框外面的框*/
+			display: inline-block;
+			border: 1px solid #ccc;
+			padding: 5px 8px;
+			margin-right: 15px;
+		}
+		.register {/*立即注册按钮*/
+			width: 150px;
+			height: 50px;
+			border-radius: 5px 5px 5px 5px;
+			background: url(new_btn.png) -411px 0 no-repeat;
+		}
+		.register:hover {
+			background: url(new_btn.png) -566px 0 no-repeat;
+			cursor: pointer;
+		}
+		.pink:hover {
+			background-color: #fcf;
+		}
+	/* 	#mycheck {
+		display: inline-block;
+		margin-left: 10px;
+		width: 110px;
+		height: 28px;
+		font-size:15px;
+	            line-height: 28px;
+	            text-align: left;
+	            padding-left: 23px;
+	            border-radius: 5px;
+	} */
+		.wrong {
+			display: inline-block;
+			margin-left: 10px;
+			width: 110px;
+			height: 28px;
+			font-size:15px;
+            line-height: 28px;
+            text-align: left;
+            padding-left: 23px;
+            border-radius: 5px;
+			background:url(wrong.png) no-repeat #FFDCD0 4px 7px;
+            border: 1px solid #FFAC91;
+            color: #FF6B39;
+		}
+		.right {
+			display: inline-block;
+			margin-left: 10px;
+			width: 14px;
+			height: 14px;
+			background:url(right.png) no-repeat;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			 function $(id){ return document.getElementById(id);}
+			$("phone").onblur = function(){
+				if(this.value==""){
+					$("mycheck").className = "wrong";
+					$("mycheck").innerHTML = "请输入手机号码";
+				}
+				else if(!(/^1[3-9]\d{9}/.test(this.value))){
+					$("mycheck").className = "wrong";
+					$("mycheck").innerHTML = "号格式码不正确";
+				}
+				else {
+					$("mycheck").className = "right";
+					$("mycheck").innerHTML = "";
+				}
+			}
+			$("password").onblur = function(){
+				if(this.value==""){
+					$("mycheck1").className = "wrong";
+					$("mycheck1").innerHTML = "请输入密码";
+					$("tip").style.display = "none";
+				}
+				// alert(this.value.length);
+				else if(this.value.length<6){
+					$("mycheck1").className = "wrong";
+					$("mycheck1").innerHTML = "密码最少6位";
+					$("tip").style.display = "none";
+				}
+				else {
+					$("mycheck1").className = "right";
+					$("mycheck1").innerHTML = "";
+				}
+			}
+			//js编写in_array方法判断是否存在这个名字
+			Array.prototype.S=String.fromCharCode(2);
+			Array.prototype.in_array=function(e){
+			    var r=new RegExp(this.S+e+this.S);
+			    return (r.test(this.S+this.join(this.S)+this.S));
+			};
+			var isExist_str = ["Tom","Jack","Carson","Nadal","Federer","Djokovic","Murray"];
+			$("myname").onblur = function(){
+				if(this.value==""){
+					$("mycheck2").className = "wrong";
+					$("mycheck2").innerHTML = "请输入昵称";
+				}
+				else if(isExist_str.in_array(this.value)){					
+					$("mycheck2").className = "wrong";
+					$("mycheck2").innerHTML = "此名已有人注册";
+				}
+				else {
+					$("mycheck2").className = "right";
+					$("mycheck2").innerHTML = "";
+				}
+			}
+			$("textnum").onblur = function(){
+				if(this.value==""){
+					$("mycheck3").className = "wrong";
+					$("mycheck3").innerHTML = "请输入验证码";
+				}
+				else {
+					$("mycheck3").className = "right";
+					$("mycheck3").innerHTML = "";
+				}
+			}
+			//城市和省之间的联动
+			var citys = [["广州","深圳","珠海","东莞"],
+							["长沙","衡阳","邵阳","湘潭"],
+							["桂林","柳州","南通","常州"],
+							["贵阳","遵义","安顺","同仁"]];
+			$("province").onchange = function citiesForProvince(){
+				var objProv = document.getElementById("province");
+			    var objCity = document.getElementById("city");
+			    var cities = citys[objProv.selectedIndex - 1];
+			    objCity.length = 1;//只保留第一项
+			    for (var i = 0; i < objProv.length; i++)  
+			    	objCity[i+1] = new Option(cities[i], cities[i]);
+			}
+			
+			// 点击按钮给其加倒数计时的计时器
+			var count = 10;// 数据的 10
+			var timer = null;// 定时器的名字
+			$("free").onclick = function(){
+				clearInterval(timer);// 先清除掉原来的定时器
+				this.disabled = true;// this 指向的是id=free这个按钮
+				var that = this;// 把 free 对象 给 that
+				timer = setInterval(sendCheckNum,1000);// 开启定时器 名字timer
+				function sendCheckNum(){
+					count--;
+					if(count>=0){
+						that.innerHTML = "还剩余"+count+"秒";
+					}
+					else{
+						that.innerHTML = "重新获取验证码";
+						that.disabled = false;
+						clearInterval(timer);// 清除定时器
+						count = 10;
+					}
+				}
+			}
+		}
+			
+	</script>
+</head>
+<body>
+	<div class="main">
+		<form action="exp7-2.php" method="post">
+			<div class="row">
+			<label for="phone"><span class="first"><i>*</i>我的手机号码：</span></label>
+			<input type="text" class="pink" id="phone" name="phone" placeholder="输入手机">
+			<button class="free" type="button" name="freenum" id="free">免费获取验证码</button>
+			<!-- 加上一句type="button"能让这个button不做为提交的按钮 -->
+			<span id="mycheck"></span>
+			</div>
+			
+			<div class="row">
+			<span class="first"></span>
+			<span class="attention">完成注册后，手机号码为你的微博注册号</span>
+			</div>
+
+			<div class="row">
+			<label for="password"><span class="first"><i>*</i>创建密码：</span></label>
+			<input type="password" class="pink" id="password" name="mpassword">
+			<span class="tip" id="tip">为了你的账户安全，请使用与其他网络不同的密码</span>
+			<span id="mycheck1"></span>
+			</div>
+			
+			<div class="row">
+			<label for="myname"><span class="first"><i>*</i>昵称：</span></label>
+			<input type="text" class="pink" id="myname" name="myname" placeholder="输入昵称">
+			<span id="mycheck2"></span>
+			</div>
+
+			<div class="row">
+				<span class="first"><i>*</i>性别：</span>	
+				<label><input type="radio" class="sex" name="sex" checked="checked" value="男">男</label>
+				<label><input type="radio" class="sex" name="sex" value="女">女</label>								
+			</div>
+
+			<div class="row">
+				<span class="first"><i>*</i>所在地：</span>
+				<span class="kuang">
+				<select name="province" id="province">
+					<option value="0" selected="selected">-请选择-</option>
+					<option value="广东">广东</option>
+					<option value="湖南">湖南</option>
+					<option value="福建">广西</option>
+					<option value="河北">河北</option>
+				</select>省
+				</span>
+				<span class="kuang">
+				<select name="city" id="city">
+					<option value="0" selected="selected">-请选择-</option>
+				</select>市
+				</span>
+			</div>
+
+			<div class="row">
+			<label>
+				<span class="first"><i>*</i>手机验证码：</span>
+				<input type="text" class="pink" name="textnum" size="5" id="textnum">
+			</label>
+			<span id="mycheck3"></span>
+			</div>
+
+			<div class="row">
+			<span class="first"></span><button type="submit" class="register" id = "register" ></button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

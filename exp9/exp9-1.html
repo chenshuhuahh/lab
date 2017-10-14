@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户名验证</title>
+		<style type="text/css">
+			form {
+				width: 400px;
+				margin: 50px auto;
+			}
+			.row {
+				margin-bottom: 10px;
+			}
+			input[type="text"],input[type="password"]{
+				padding-left: 5px;
+				height: 25px;
+			}
+			input[type="submit"] {
+				margin-left: 50px;
+			}
+			#result {
+				margin-left: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="#" method="get">
+			<div class="row">
+				<label>姓名：<input type="text" name="user" id="user"/></label><span id="result"></span>
+			</div>
+			<div class="row">
+				<label>性别：
+					<select name="sex">
+						<option value="man">男</option>
+						<option value="woman">女</option>
+					</select>
+				</label>
+			</div>
+			<div class="row">
+				<label>密码：<input type="password" name="psw"/></label>
+			</div>
+			<div class="row">
+				<input type="submit" value="注册" onclick="sendForm();"/>
+			</div>
+		</form>
+	</body>
+</html>
+<script>
+window.onload = function(){
+	document.getElementById("user").onblur = checkName;
+	function checkName(){
+		document.getElementById("result").innerHTML = "验证中....";
+		document.getElementById("result").style.color = "#888";
+		var user = document.getElementById("user").value;
+		var xhr;//创建对象,浏览器兼容性判断
+	    if (window.XMLHttpRequest)
+	       xhr = new XMLHttpRequest();
+	    else
+	       xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		xhr.onreadystatechange = function(){receiveMsg(xhr);};//指定回调函数
+		xhr.open("GET","exp9-1.php?user="+user,true);//初始化请求
+		xhr.send();//发送请求
+	}
+	//回调函数
+	function receiveMsg(xhr){
+		if(xhr.readyState==4 && xhr.status==200){//状态值变化
+			if(xhr.responseText==1){
+				// console.log("right");
+				document.getElementById("result").innerHTML = "用户名可以使用！";
+				document.getElementById("result").style.color = "#0c0";
+			}else{
+				// console.log("wrong");
+				document.getElementById("result").innerHTML = "用户名已注册！";
+				document.getElementById("result").style.color = "red";
+			}
+		}
+	}
+}	
+</script>

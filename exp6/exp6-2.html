@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>lab6-2输入输出</title>
+		<style type="text/css">
+			* {
+				font-size: 20px;
+				margin-bottom: 10px;;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var btn = document.getElementById("btn");
+				var answer = document.getElementById("answer");
+				btn.onclick = function(){
+					//获取输入的字符串
+					var str_input = prompt("请输入计算式：","1+2");
+					//获取字符串中匹配的运算符
+					var operator = str_input.match(/[\+\-\*\/]/);
+					//按这个匹配的运算符进行分割
+					var str_split = str_input.split(operator);
+					//得到两个需要运算的数
+					var num1 = Number(str_split[0]);
+					var num2 = Number(str_split[1]);
+					result = 0;
+					//判断运算符进行运算
+					switch(String(operator)){
+						case '+':
+							result = num1+num2;
+							break;
+						case '-':
+							result = num1-num2;
+							break;
+						case '*':
+							result = num1*num2;
+							break;
+						case '/':
+							result = num1/num2;
+							break;
+					}
+					//返回结果到界面上
+					answer.innerHTML = "结果是："+ result;
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+		<button id="btn">弹出对话框计算</button><br/>
+		<span id="answer">结果是：</span>
+	</body>
+</html>
